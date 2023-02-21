@@ -11,7 +11,6 @@ import Feed from '../components/Feed';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home(props) {
-  console.log(props)
   if (!props.sessionExists) {return <Login />}
   return (
     <div className='h-screen bg-gray-100 overflow-hidden'>
