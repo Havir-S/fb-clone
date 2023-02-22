@@ -5,9 +5,8 @@ import {VideoCameraIcon, CameraIcon, EmojiHappyIcon } from '@heroicons/react/sol
 
 
 import { db } from '../firebase';
-import { collection, addDoc, serverTimestamp  } from "firebase/firestore"; 
-import { getStorage, ref, uploadString  } from "firebase/storage";
-import { getDatabase, ref as refDB, child, push, update } from "firebase/database";
+import { collection, addDoc, serverTimestamp, getDoc, updateDoc  } from "firebase/firestore"; 
+import { getStorage, ref, uploadString, getDownloadURL } from "firebase/storage";
 
 const InputBox = () => {
     const {data: session, status} = useSession();
@@ -31,23 +30,22 @@ const InputBox = () => {
                 timestamp:serverTimestamp()
             })
             
-            console.log("Document written with ID: ", docRef.id);
+            console.log("Document written with ID: ", docRef);
 
             if (imageUpload) {
                 const storageRef = ref(storage, `posts/${docRef.id}`);
                 const uploadTask = await uploadString(storageRef, imageUpload, 'data_url').then((snapshot) => {
-                    console.log('Uploaded a data_url string!', snapshot);
+
+                    getDownloadURL(ref(storage, `posts/${docRef.id}`)).then(url => {
+                        updateDoc(docRef, {postImage: url})
+                    })
+
+                    
+                    
                   });
-
+                
                 removeImage();
-
-                // uploadTask.on('state_change', null, (err) => console.log(err), () => {
-                //     console.log('it worked')
-                // })
-
-
             }
-            
           } catch (e) {
             console.error("Error adding document: ", e);
           }

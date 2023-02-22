@@ -1,4 +1,4 @@
-'use server';
+// 'use server';
 
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
@@ -7,11 +7,15 @@ import Login from '../components/Login'
 import { getSession } from "next-auth/react"
 import Sidebar from '../components/Sidebar';
 import Feed from '../components/Feed';
+import Widgets from '../components/Widgets';
+
+import { getDocs, collection } from 'firebase/firestore';
+import { db } from '../firebase'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home(props) {
-  if (!props.sessionExists) {return <Login />}
+export default function Home({sessionExists, posts}) {
+  if (!sessionExists) {return <Login />}
   return (
     <div className='h-screen bg-gray-100 overflow-hidden'>
       <Head>
@@ -28,8 +32,8 @@ export default function Home(props) {
 
       <main className='flex'>
         <Sidebar />
-        <Feed />
-        {/* Widgets */}
+        <Feed posts={posts} />
+        <Widgets />
       </main>
     </div>
   )
@@ -39,12 +43,22 @@ export async function getServerSideProps(context) {
   
   try {
     const session = await getSession(context);
-    // console.log('TUTAJ', session)
+
+    const posts =  await getDocs(collection(db, 'posts'))
+
+    const mappedPosts = posts.docs.map((doc) =>  { return {
+      id: doc.id,
+      ...doc.data(),
+      timestamp: null
+      
+    }})
+
     if (session) {
       return {
         props: {
           session,
-          sessionExists: true
+          sessionExists: true,
+          posts: mappedPosts
         }
       }
     }
