@@ -1,13 +1,15 @@
 import Image from 'next/image'
 import React from 'react'
 import {ChatAltIcon, ThumbUpIcon } from '@heroicons/react/solid';
+import ModalImage from "react-modal-image";
 
-const Post = ({name, message, email, timestamp, image, postImage}) => {
+const Post = ({name, message, email, timestamp, image, postImage, openPic}) => {
   return (
     <div className='flex flex-col'>
         <div className={`p-5 bg-white mt-5 ${postImage ? 'rounded-t-2xl' : 'rounded-2xl' } shadow-sm`}>
             <div className='flex items-center space-x-2'>
-                <img className='rounded-full' src={image} width={40} height={40} alt='' />
+                <img className='rounded-full' src={image} alt='' width={40} />
+                
                 <div>
                     <p className='font-medium'>{name}</p>
                     {timestamp ? (
@@ -26,7 +28,14 @@ const Post = ({name, message, email, timestamp, image, postImage}) => {
 
         {postImage && (
             <div className='relative h-56 md:h-96 bg-white '>
-                <Image alt='' src={postImage}  fill style={{objectFit: 'cover'}}/>
+                <Image onClick={(e) => {openPic(e)}} alt='' src={postImage}  fill style={{objectFit: 'cover'}} className='cursor-pointer'/>
+                {/* <ModalImage
+                    className=' object-cover m-auto'
+                    width={40} height={40} 
+                    small={postImage}
+                    large={postImage}
+                    alt=""
+                />; */}
             </div>
         )}
 

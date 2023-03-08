@@ -35,7 +35,7 @@ function Header() {
         <div className='flex items-center sm:space-x-2 justify-end'>
             <Image
                 onClick={() => signOut()}
-                className='rounded-full cursor:pointer'
+                className='rounded-full cursor-pointer transition duration-150 border-4 border-transparent hover:border-orange-200'
                 src={session.user.image}
                 width='40'
                 height='40'

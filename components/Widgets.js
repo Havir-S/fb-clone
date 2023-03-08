@@ -4,13 +4,10 @@ import { DotsHorizontalIcon, VideoCameraIcon } from '@heroicons/react/solid'
 import Contact from './Contact'
 
 const contacts = [
-    { src: 'https:/links.papareact.com/f0p', name:'Jeff Bezoz' },
-    { src: 'https:/links.papareact.com/kxk', name:'Elon Musk' },
-    { src: 'https:/links.papareact.com/zvy', name:'Bill Gates' },
-    { src: 'https:/links.papareact.com/snf', name:'Mark Zuckerberg' },
-    { src: 'https:/links.papareact.com/d0c', name:'Harry Potter' },
-    { src: 'https:/links.papareact.com/6gg', name:'The Queen' },
-    { src: 'https:/links.papareact.com/r57', name:'James Bond' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/8/85/Elon_Musk_Royal_Society_%28crop1%29.jpg', name:'Elon Musk' },
+    { src: 'https://media.snl.no/media/28002/standard_compressed_Bill_gates.jpg', name:'Bill Gates' },
+    { src: 'https://static.wirtualnemedia.pl/media/top/zuckerberg-meta655.jpg', name:'Mark Zuckerberg' },
+    { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Dwayne_Johnson_2014_%28cropped%29.jpg/640px-Dwayne_Johnson_2014_%28cropped%29.jpg', name:'Dwayne Johnson' },
 ]
 
 const Widgets = () => {

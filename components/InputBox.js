@@ -30,7 +30,6 @@ const InputBox = () => {
                 timestamp:serverTimestamp()
             })
             
-            console.log("Document written with ID: ", docRef);
 
             if (imageUpload) {
                 const storageRef = ref(storage, `posts/${docRef.id}`);
