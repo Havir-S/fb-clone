@@ -15,7 +15,7 @@ const Posts = ({posts}) => {
       );
 
 
-      const [modalPic, setModalPic] = useState('https://upload.wikimedia.org/wikipedia/commons/4/45/Bill.Gates.jpg')
+      const [modalPic, setModalPic] = useState(null)
       const modal = useRef(null)
 
       const openPic = (pic) => {
@@ -23,7 +23,10 @@ const Posts = ({posts}) => {
       }
 
       useEffect(() => {
-        modal.current.toggleModal()
+        if (modalPic !== null) {
+          modal.current.toggleModal()
+        }
+        
       }, [modalPic])
 
   return (
